@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-<!--
+
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.password">databases8</property>
@@ -13,8 +13,8 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="entity.Point"/>
--->
 
+<!--
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://192.168.10.99/studs</property>
         <property name="hibernate.connection.password">elp707</property>
@@ -23,6 +23,6 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="entity.Point"/>
-
+-->
     </session-factory>
 </hibernate-configuration>

@@ -4,3 +4,4 @@
 /Web-lab4.iml
 /out/
 /node_modules/
+/src/main/webapp/WEB-INF/hibernate.cfg.xml

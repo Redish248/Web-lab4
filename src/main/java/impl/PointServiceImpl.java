@@ -25,4 +25,14 @@ public class PointServiceImpl implements PointService{
     public List<Point> getPointsByR(double r) {
         return pointRepository.getPointsByR(r);
     }
+
+    @Override
+    public List<Point> getAllPoints() {
+        return (List<Point>) pointRepository.findAll();
+    }
+
+    @Override
+    public void savePoint(Point point) {
+        pointRepository.save(point);
+    }
 }
