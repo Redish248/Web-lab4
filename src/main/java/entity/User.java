@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user", schema = "lab4", catalog = "postgres")
+@Table(name = "users", schema = "lab4", catalog = "postgres")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

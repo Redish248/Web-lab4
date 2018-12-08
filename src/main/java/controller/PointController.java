@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import service.PointService;
 
 @RestController
-@RequestMapping(value = "/checkPoint")
+@RequestMapping("/checkPoint")
 @EnableAutoConfiguration
 public class PointController {
 
     @Autowired
     PointService pointService;
 
-    @PostMapping(value = "/points")
+    @PostMapping("/point")
     ResponseEntity<?> sendPoint(@RequestBody Point point ) {
         if (point.getR() <= 0 || point.getR() > 3) {
             return ResponseEntity.status(HttpStatus.OK).body("R incorrect");
