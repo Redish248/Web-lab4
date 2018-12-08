@@ -1,2 +1,2 @@
-DROP TABLE users;
+DROP TABLE user;
 DROP TABLE point;

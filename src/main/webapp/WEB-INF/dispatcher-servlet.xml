@@ -16,7 +16,7 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <context:component-scan base-package="entity, service, repository, controller" />
+    <context:component-scan base-package="entity, service, repository, impl, controller" />
     <jpa:repositories base-package="repository"/>
 
 
