@@ -1,0 +1,2 @@
+DELETE FROM point;
+DELETE FROM users;
