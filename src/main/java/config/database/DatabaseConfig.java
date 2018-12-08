@@ -21,8 +21,8 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("repository")
-@ComponentScan("repository")
-@PropertySource("classpath:database.properties")
+@ComponentScan(basePackages = {"service", "repository", "entity", "controller", "impl"})
+@PropertySource("classpath:application.properties")
 public class DatabaseConfig {
 
     @Resource
@@ -51,6 +51,7 @@ public class DatabaseConfig {
         return new HibernateJpaVendorAdapter();
     }
 
+    
     public Properties getHibernateProperties(){
         Properties properties = new Properties();
         properties.put("db.hibernate.hbm2ddl.auto", env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));

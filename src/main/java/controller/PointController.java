@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.Gson;
 import entity.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,30 +14,42 @@ import service.PointService;
 @EnableAutoConfiguration
 public class PointController {
 
-    @Autowired
-    PointService pointService;
+    private final PointService pointService;
 
-    @PostMapping("/point")
-    ResponseEntity<?> sendPoint(@RequestBody Point point ) {
-        if (point.getR() <= 0 || point.getR() > 3) {
+    @Autowired
+    public PointController(PointService pointService) {
+        this.pointService = pointService;
+    }
+
+    @PostMapping("/save")
+    public @ResponseBody ResponseEntity savePoint(@RequestParam("x") String x,
+                             @RequestParam("y") String y,
+                             @RequestParam("r") String r) {
+        if ((Double.valueOf(r) <= 0) || (Double.valueOf(r) > 3)) {
             return ResponseEntity.status(HttpStatus.OK).body("R incorrect");
         }
 
-        if (point.getX() < -5 || point.getX() > 3) {
+        if ((Double.valueOf(x) < -5) || (Double.valueOf(x) > 3)) {
             return ResponseEntity.status(HttpStatus.OK).body("X incorrect");
         }
 
-        if (point.getY() < -5 || point.getY() > 5) {
+        if ((Double.valueOf(y) < -5) || (Double.valueOf(y) > 5)) {
             return ResponseEntity.status(HttpStatus.OK).body("Y incorrect");
         }
+        Point point = new Point();
+        point.setX(Double.parseDouble(x));
+        point.setY(Double.parseDouble(y));
+        point.setR(Double.parseDouble(r));
+        point.setInArea(point.checkArea());
 
         pointService.savePoint(point);
-        return ResponseEntity.status(HttpStatus.OK).body(point);
+        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(point));
     }
 
+    //TODO: find by session id
     @GetMapping(value = "/points")
-    ResponseEntity<?> getAllPoints() {
-        return ResponseEntity.status(HttpStatus.OK).body(pointService.getAllPoints());
+    public @ResponseBody ResponseEntity getAllPoints() {
+        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(pointService.getAllPoints()));
     }
 
 }

@@ -5,3 +5,4 @@
 /out/
 /node_modules/
 /src/main/webapp/WEB-INF/hibernate.cfg.xml
+/application.properties

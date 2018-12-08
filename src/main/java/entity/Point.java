@@ -35,7 +35,7 @@ public class Point implements Serializable{
         this.isInArea = checkArea();
     }
 
-    private boolean checkArea() {
+    public boolean checkArea() {
         return true;
     }
 
