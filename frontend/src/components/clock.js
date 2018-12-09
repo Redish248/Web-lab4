@@ -25,7 +25,7 @@ class Clock extends Component {
     }
 }
 
-//-------------------------------------
+//---------------------------------------------------------------------------------------------
 function setTime() {
     let date = new Date();
     let sec = date.getSeconds();
