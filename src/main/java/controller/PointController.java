@@ -25,31 +25,23 @@ public class PointController {
     public @ResponseBody ResponseEntity savePoint(@RequestParam("x") String x,
                              @RequestParam("y") String y,
                              @RequestParam("r") String r) {
-        if ((Double.valueOf(r) <= 0) || (Double.valueOf(r) > 3)) {
-            return ResponseEntity.status(HttpStatus.OK).body("R incorrect");
-        }
+        Point point = new Point(Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(r));
 
-        if ((Double.valueOf(x) < -5) || (Double.valueOf(x) > 3)) {
-            return ResponseEntity.status(HttpStatus.OK).body("X incorrect");
+        if (pointService.savePoint(point)) {
+            return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(point));
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body("Incorrect input!");
         }
-
-        if ((Double.valueOf(y) < -5) || (Double.valueOf(y) > 5)) {
-            return ResponseEntity.status(HttpStatus.OK).body("Y incorrect");
-        }
-        Point point = new Point();
-        point.setX(Double.parseDouble(x));
-        point.setY(Double.parseDouble(y));
-        point.setR(Double.parseDouble(r));
-        point.setInArea(point.checkArea());
-
-        pointService.savePoint(point);
-        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(point));
     }
 
-    //TODO: find by session id
     @GetMapping(value = "/points")
     public @ResponseBody ResponseEntity getAllPoints() {
-        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(pointService.getAllPoints()));
+        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(pointService.getPointsBySession()));
     }
 
+    @PostMapping(value="/logout")
+    public @ResponseBody ResponseEntity logOut(){
+        pointService.closeSession();
+        return ResponseEntity.status(HttpStatus.OK).body("Session closed");
+    }
 }

@@ -9,11 +9,11 @@ import java.io.Serializable;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "point", schema = "lab4", catalog = "postgres")
+@Table(name = "pointlab", schema = "public", catalog = "postgres")
 public class Point implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pointId")
+    @Column(name = "point_Id")
     Integer pointId;
 
     @Column(name = "x", nullable = false)
@@ -25,8 +25,11 @@ public class Point implements Serializable{
     @Column(name = "r", nullable = false)
     double r;
 
-    @Column(name = "isInArea", nullable = false)
+    @Column(name = "is_In_Area", nullable = false)
     boolean isInArea;
+
+    @Column(name = "session_Id", nullable = false)
+    private String sessionId;
 
     public Point(double x, double y, double r) {
         this.x = x;
@@ -35,8 +38,10 @@ public class Point implements Serializable{
         this.isInArea = checkArea();
     }
 
-    public boolean checkArea() {
-        return true;
+    private boolean checkArea() {
+        return  (((x>=0) && (y>=0) && (Math.pow(x,2)+Math.pow(y,2)<=Math.pow(r,2))) ||
+                ((x>=0) && (y<=0) && (x<=r/2) && (y>=-r)) ||
+                ((x<=0) && (y>=0) && (y<=(x+r)/2)));
     }
 
 }

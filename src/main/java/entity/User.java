@@ -12,11 +12,11 @@ import java.security.NoSuchAlgorithmException;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "users", schema = "lab4", catalog = "postgres")
+@Table(name = "userlab", schema = "public", catalog = "postgres")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
+    @Column(name = "user_Id")
     Integer id;
 
     @Column(name = "nick", nullable = false, length = 40)
@@ -27,21 +27,6 @@ public class User {
 
     public User(String nick, String password) {
         this.nick = nick;
-        this.password = getMD5(password);
-    }
-
-
-    private static String getMD5(String pass) {
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(pass.getBytes(),0, pass.length());
-            String hashedPass = new BigInteger(1,messageDigest.digest()).toString(16);
-            if (hashedPass.length() < 32) {
-                hashedPass = "0" + hashedPass;
-            }
-            return hashedPass;
-        } catch (NoSuchAlgorithmException exc) {
-            return null;
-        }
+        this.password = password;
     }
 }

@@ -1,2 +1,2 @@
-DELETE FROM Point;
-DELETE FROM User;
+DELETE FROM PointLab;
+DELETE FROM UserLab;

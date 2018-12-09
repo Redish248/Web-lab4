@@ -9,4 +9,6 @@ public interface PointRepository extends CrudRepository<Point, Integer> {
     //TODO: а это надо?
     Point findPointByPointId(int id);
     List<Point> getPointsByR(double r);
+    List<Point> getPointsBySessionId(String session);
+    void deleteAllBySessionId(String session);
 }

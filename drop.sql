@@ -1,2 +1,2 @@
-DROP TABLE user;
-DROP TABLE point;
+DROP TABLE userlab;
+DROP TABLE pointlab;

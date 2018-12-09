@@ -28,13 +28,13 @@ public class DatabaseConfig {
     @Resource
     private Environment env;
 
-    private static final String PROP_DATABASE_DRIVER = "db.driver";
-    private static final String PROP_DATABASE_PASSWORD = "db.password";
-    private static final String PROP_DATABASE_URL = "db.url";
-    private static final String PROP_DATABASE_USERNAME = "db.username";
-    private static final String PROP_HIBERNATE_DIALECT = "db.hibernate.dialect";
+    private static final String PROP_DATABASE_DRIVER = "spring.datasource.driver-class-name";
+    private static final String PROP_DATABASE_PASSWORD = "spring.datasource.password";
+    private static final String PROP_DATABASE_URL = "spring.datasource.url";
+    private static final String PROP_DATABASE_USERNAME = "spring.datasource.username";
+    private static final String PROP_HIBERNATE_DIALECT = "spring.jpa.properties.hibernate.dialect";
     private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
-    private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "db.hibernate.hbm2ddl.auto";
+    private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
 
     @Bean
     public DataSource dataSource(){
@@ -65,7 +65,7 @@ public class DatabaseConfig {
         entityManagerFactory.setDataSource(dataSource());
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter());
         entityManagerFactory.setJpaProperties(getHibernateProperties());
-        entityManagerFactory.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
+        entityManagerFactory.setPackagesToScan("entity");
         return entityManagerFactory;
     }
 

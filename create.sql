@@ -1,21 +1,13 @@
-CREATE TABLE Users (
-  userId integer PRIMARY KEY,
+CREATE TABLE UserLab (
+  user_Id serial PRIMARY KEY,
   nick VARCHAR(40) NOT NULL,
-  password VARCHAR(40) NOT NULL
+  password VARCHAR(128) NOT NULL
 );
 
-CREATE TABLE Point (
-  pointId INTEGER PRIMARY KEY,
+CREATE TABLE PointLab (
+  point_Id serial PRIMARY KEY,
   x REAL NOT NULL,
   y REAL NOT NULL,
   r REAL NOT NULL,
-  isInArea BOOLEAN NOT NULL
+  is_In_Area BOOLEAN NOT NULL
 );
-
-CREATE SEQUENCE lab4.point_pointid_seq NO MINVALUE NO MAXVALUE NO CYCLE;
-ALTER TABLE lab4.point ALTER COLUMN pointid SET DEFAULT nextval('lab4.point_pointid_seq');
-ALTER SEQUENCE lab4.point_pointid_seq OWNED BY lab4.point.pointid;
-
-CREATE SEQUENCE lab4.users_userid_seq NO MINVALUE NO MAXVALUE NO CYCLE;
-ALTER TABLE lab4.users ALTER COLUMN userid SET DEFAULT nextval('lab4.users_userid_seq');
-ALTER SEQUENCE lab4.users_userid_seq OWNED BY lab4.users.userid;
