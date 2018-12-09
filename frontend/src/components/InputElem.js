@@ -13,33 +13,20 @@ class InputElem extends Component {
         return (
             <form method="post" action="/checkPoint">
                 <h3>Координата X:</h3>
-                <Spinner /*value={this.state.value} onChange={(e) => this.setState({value: e.value})}*/ min={-5} max={3} />
+                <Spinner min={-5} max={3}/>
 
-                <h3>Координата Y: {this.state.val2}</h3>
-                <InputText value={this.state.val2} style={{width: '14em'}} type="number" onChange={this.onChangeSlider2} />
-                <Slider value={this.state.val2} onChange={this.onChangeSlider2} style={{width: '14em'}} />
+                <h3>Координата Y:</h3>
 
-                <h3>Радиус R:</h3>
-                <Spinner /*value={this.state.value} onChange={(e) => this.setState({value: e.value})}*/ min={-5} max={3} />
+                <Slider  style={{width: '14em'}}/>
+
+                <h3>Радиус R: </h3>
+                <Spinner id="R" min={-5} max={3}/>
 
 
-                <Button label="Проверить" onclick="/checkPoint/save" />
+                <Button label="Проверить" /*onClick="/checkPoint/save"*//>
             </form>
         );
     }
 
-onChangeSlider2(e) {
-    var newValue;
-    if (e.target && e.target.nodeName === "INPUT") {
-        newValue = e.target.value;
-    }
-    else {
-        newValue = e.value;
-    }
-
-    this.setState({ val2: newValue });
 }
-}
-
-
 export default InputElem;

@@ -59,7 +59,7 @@ function createCalendar() {
     document.getElementById("tableCalendar").innerHTML += "<tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>";
     let num = 1;
     let str = "<tr>";
-    let start = 8 - day%7;
+    let start = 9 - day%7; //TODO: она кривая
     for(let k = 1; k <= 7;k++ ) {
         if (k < start) {
             str += "<td/>";

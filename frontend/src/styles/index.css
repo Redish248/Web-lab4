@@ -103,7 +103,8 @@ code {
 }
 
 .nav-link {
-  
+  color: darkblue;
+  font-weight: bold;
   font-size: 20px;
 }
 

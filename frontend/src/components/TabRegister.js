@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import {TabMenu} from 'primereact/tabmenu';
 import RegForm from './RegForm';
 import LogInForm from './LogInForm';
-import ReactDOM from "react-dom";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
 
 

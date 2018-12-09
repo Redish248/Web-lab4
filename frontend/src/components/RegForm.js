@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-//import './App.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
 import {InputText} from 'primereact/inputtext';
-import ReactDOM from "react-dom";
 
 class RegForm extends Component {
     render() {
@@ -15,7 +13,7 @@ class RegForm extends Component {
                 <h1>Регистрация:</h1>
 
                 <h3>Имя пользователя:</h3>
-                <InputText />
+                <InputText keyfilter={/[^\s]/} />
 
 
                 <h3>Пароль:</h3>
