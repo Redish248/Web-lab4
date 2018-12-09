@@ -14,7 +14,7 @@ import service.PointService;
 @EnableAutoConfiguration
 public class PointController {
 
-    private final PointService pointService;
+    final PointService pointService;
 
     @Autowired
     public PointController(PointService pointService) {

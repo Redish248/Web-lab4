@@ -17,8 +17,12 @@ public class RegistrationController {
 
    @Autowired
     UserService userService;
-
-   @PostMapping("/checkUser")
+    //TODO:
+    //-почему девочки такие тупые?
+    //-не знаю
+    //-прикинь, некоторые люди ещё тупее. Как они с этим живут?
+    //@Оля
+    @PostMapping("/checkUser")
     public @ResponseBody ResponseEntity checkUser(@RequestParam("login") String login, @RequestParam("password") String password) {
         //User realUser = userService.getUserByNickAndPassword(login, BCrypt.hashpw(password, BCrypt.gensalt()));
         boolean pswd = BCrypt.checkpw(password,userService.getUserByNick(login).getPassword());
@@ -27,11 +31,6 @@ public class RegistrationController {
             return ResponseEntity.status(HttpStatus.OK).body("Username or password was incorrect");
         }
         return ResponseEntity.status(HttpStatus.OK).body("Successful authentication");
-    }
-
-    @GetMapping
-    public ResponseEntity getHello() {
-        return ResponseEntity.ok("Authentication success");
     }
 
     @PostMapping( "/addUser")
