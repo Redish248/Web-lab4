@@ -6,22 +6,40 @@ import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
 import {InputText} from 'primereact/inputtext';
 
-//TODO: переходы надо добавить и что-то сделать с кнопкой регистрации
 class LogInForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {nick: '',
+        password: ''};
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        alert(this.state.nick + " " + this.state.password);
+    }
+
+    handleNickChange(event) {
+        this.setState({nick: event.target.value});
+    }
+
+    handlePasswordChange(event) {
+        this.setState({password: event.target.value});
+    }
+
     render() {
         return (
-            <form id="forma" method="post" action="/registration/checkUser">
+            <form id="forma" /*method="post" action="/registration/checkUser"*/ onSubmit={this.handleSubmit.bind(this)}>
                 <h1>Вход:</h1>
 
                 <h3>Имя пользователя:</h3>
-                <InputText id="login" keyfilter={/[^\s]/}/>
+                <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleNickChange.bind(this)}/>
 
 
                 <h3>Пароль:</h3>
-                <Password id="pswd" feedback={false}/>
+                <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
                 <br/><br/>
 
-                <Button label="Войти" onClick="validate()" onSubmit="registration/checkUser"/>
+                <Button label="Войти" /*onClick="validate()" onSubmit="registration/checkUser"*//>
 
             </form>
         );

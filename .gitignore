@@ -8,3 +8,4 @@
 /application.properties
 /frontend/package.json
 /frontend/package-lock.json
+/src/main/resources/application.properties
