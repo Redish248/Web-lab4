@@ -6,3 +6,5 @@
 /node_modules/
 /src/main/webapp/WEB-INF/hibernate.cfg.xml
 /application.properties
+/frontend/package.json
+/frontend/package-lock.json
