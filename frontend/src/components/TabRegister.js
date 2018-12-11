@@ -10,7 +10,6 @@ import {Tabs, Tab} from 'react-bootstrap-tabs';
 class TabRegister extends Component {
 
     render() {
-
         return (
             <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
                 <Tab id="tab1" label="Вход"><LogInForm/></Tab>

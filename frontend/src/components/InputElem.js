@@ -9,21 +9,50 @@ import {Slider} from 'primereact/slider';
 
 
 class InputElem extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            sliderY: null,
+            spinnerX: null,
+            spinnerR: null
+        };
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        alert(this.state.spinnerX + " " + this.state.sliderY + " " + this.state.spinnerR);
+    }
+
     render() {
         return (
-            <form method="post" action="/checkPoint">
-                <h3>Координата X:</h3>
-                <Spinner min={-5} max={3}/>
-
-                <h3>Координата Y:</h3>
-
-                <Slider  style={{width: '14em'}}/>
-
-                <h3>Радиус R: </h3>
-                <Spinner id="R" min={-5} max={3}/>
-
-
-                <Button label="Проверить" /*onClick="/checkPoint/save"*//>
+            <form /*method="post" action="/checkPoint"*/ onSubmit={this.handleSubmit.bind(this)}>
+                <table className="formTableXYR">
+                    <tr id="chooseLabel">
+                        Выберите данные:
+                    </tr>
+                    <tr>
+                        Координата X:
+                    </tr>
+                    <tr>
+                        <Spinner min={-5} max={3} value={this.state.spinnerX} onChange={(e) => this.setState({spinnerX: e.value})}/>
+                    </tr>
+                    <tr>
+                        Координата Y: {this.state.sliderY}
+                    </tr>
+                    <tr>
+                        <Slider value={this.state.sliderY} onChange={(e) => this.setState({sliderY: e.value})} style={{width: '14em'}} max ={5} min={-5}/>
+                    </tr>
+                    <tr>
+                        Радиус R:
+                    </tr>
+                    <tr>
+                        <Spinner id="R" min={-5} max={3} value={this.state.spinnerR} onChange={(e) => this.setState({spinnerR: e.value})}/>
+                    </tr>
+                    <tr>
+                        <Button label="Проверить" /*onClick="/checkPoint/save"*//>
+                    </tr>
+                </table>
             </form>
         );
     }

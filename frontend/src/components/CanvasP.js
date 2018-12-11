@@ -7,7 +7,7 @@ class CanvasP extends Component {
     render() {
         return (
 
-                <canvas id="canvas" onClick={clickCanvas()} />
+                <canvas id="canvas" /*onClick={drawCanvas(this,2)}*/ />
 
         );
     }

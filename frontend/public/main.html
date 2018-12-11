@@ -30,10 +30,16 @@
 <br/>
 
 <div class="container">
-    <table>
+    <table class="mainTable">
         <tr>
             <td>
-    <div id="canvasPoint"></div>
+    <div id="canvasPoint">
+        <script>
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            ReactDOM.render(<CanvasP/>,document.getElementById('canvasPoint'));
+        </script>
+    </div>
             </td>
             <td>
     <div id = "inputXYR"></div>
@@ -41,6 +47,7 @@
         </tr>
     </table>
 </div>
+    <div id="resultPoint"></div>
 </center>
 </body>
 </html>

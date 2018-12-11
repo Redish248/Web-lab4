@@ -26,6 +26,11 @@ class LogInForm extends Component {
         this.setState({password: event.target.value});
     }
 
+     home(e) {
+        e.preventDefault();
+        window.location = './main.html';
+    }
+
     render() {
         return (
             <form id="forma" /*method="post" action="/registration/checkUser"*/ onSubmit={this.handleSubmit.bind(this)}>
@@ -39,7 +44,7 @@ class LogInForm extends Component {
                 <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
                 <br/><br/>
 
-                <Button label="Войти" /*onClick="validate()" onSubmit="registration/checkUser"*//>
+                <Button label="Войти" onClick={this.home.bind(this)}/*onClick="validate()" onSubmit="registration/checkUser"*//>
 
             </form>
         );

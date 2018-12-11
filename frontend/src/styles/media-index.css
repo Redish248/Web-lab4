@@ -1,0 +1,26 @@
+@media only  screen and (max-width: 732px) {
+
+    .header_1, .header_2, .container, .body_2{
+        width: 732px;
+        max-width: 95%;
+    }
+
+    .body_2 {
+        height: 300px;
+    }
+
+    .header_1 {
+        height: 55px;
+        font-size: 20px;
+    }
+
+    .header_2 {
+        height: 75px;
+        font-size: 15pt;
+    }
+
+    .container {
+        font-size: 30px;
+        height: 450px;
+    }
+}
