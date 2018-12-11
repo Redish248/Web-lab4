@@ -5,6 +5,7 @@ import 'primeicons/primeicons.css';
 import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
 import {InputText} from 'primereact/inputtext';
+import {withRouter} from 'react-router-dom'
 
 class LogInForm extends Component {
     constructor(props) {
@@ -13,10 +14,11 @@ class LogInForm extends Component {
         password: ''};
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
-        alert(this.state.nick + " " + this.state.password);
-    }
+        //alert(this.state.nick + " " + this.state.password);
+        this.props.history.push('/main');
+    };
 
     handleNickChange(event) {
         this.setState({nick: event.target.value});
@@ -26,14 +28,11 @@ class LogInForm extends Component {
         this.setState({password: event.target.value});
     }
 
-     home(e) {
-        e.preventDefault();
-        window.location = './main.html';
-    }
+
 
     render() {
         return (
-            <form id="forma" /*method="post" action="/registration/checkUser"*/ onSubmit={this.handleSubmit.bind(this)}>
+            <form id="formLogIn" /*method="post" action="/registration/checkUser"*/ onSubmit={this.handleSubmit}>
                 <h1>Вход:</h1>
 
                 <h3>Имя пользователя:</h3>
@@ -44,7 +43,7 @@ class LogInForm extends Component {
                 <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
                 <br/><br/>
 
-                <Button label="Войти" onClick={this.home.bind(this)}/*onClick="validate()" onSubmit="registration/checkUser"*//>
+                <Button label="Войти" /*onClick="validate()" onSubmit="registration/checkUser"*//>
 
             </form>
         );
@@ -74,7 +73,7 @@ function removeError() {
     error.innerHTML = "<br/>";
 }
 
-let form = document.getElementById("forma");
+let form = document.getElementById("formLogIn");
 
 form.addEventListener('submit', function (event) {
     removeError();
@@ -82,4 +81,4 @@ form.addEventListener('submit', function (event) {
 });
 
 */
-export default LogInForm;
+export default withRouter(LogInForm);

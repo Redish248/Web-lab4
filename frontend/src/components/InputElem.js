@@ -26,7 +26,7 @@ class InputElem extends Component {
 
     render() {
         return (
-            <form /*method="post" action="/checkPoint"*/ onSubmit={this.handleSubmit.bind(this)}>
+            <form id = "pointForm"/*method="post" action="/checkPoint"*/ onSubmit={this.handleSubmit.bind(this)}>
                 <table className="formTableXYR">
                     <tr id="chooseLabel">
                         Выберите данные:
@@ -35,13 +35,13 @@ class InputElem extends Component {
                         Координата X:
                     </tr>
                     <tr>
-                        <Spinner min={-5} max={3} value={this.state.spinnerX} onChange={(e) => this.setState({spinnerX: e.value})}/>
+                        <Spinner id="X" min={-5} max={3} value={this.state.spinnerX} onChange={(e) => this.setState({spinnerX: e.value})}/>
                     </tr>
                     <tr>
                         Координата Y: {this.state.sliderY}
                     </tr>
                     <tr>
-                        <Slider value={this.state.sliderY} onChange={(e) => this.setState({sliderY: e.value})} style={{width: '14em'}} max ={5} min={-5}/>
+                        <Slider id= "Y" value={this.state.sliderY} onChange={(e) => this.setState({sliderY: e.value})} style={{width: '14em'}} max ={5} min={-5}/>
                     </tr>
                     <tr>
                         Радиус R:
@@ -50,7 +50,7 @@ class InputElem extends Component {
                         <Spinner id="R" min={-5} max={3} value={this.state.spinnerR} onChange={(e) => this.setState({spinnerR: e.value})}/>
                     </tr>
                     <tr>
-                        <Button label="Проверить" /*onClick="/checkPoint/save"*//>
+                        <Button id="pointButton" label="Проверить" /*onClick="/checkPoint/save"*//>
                     </tr>
                 </table>
             </form>

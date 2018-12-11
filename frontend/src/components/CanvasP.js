@@ -4,22 +4,51 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 class CanvasP extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {context: null};
+    }
+
     render() {
         return (
-
-                <canvas id="canvas" /*onClick={drawCanvas(this,2)}*/ />
+            <canvas id="canvas" width="300px" height="300px"
+                    /*ref={(e) => this.setState({context: e.getContext('2d')})} /*onClick={this.clickCanvas.bind(this)}*//>
 
         );
     }
-
 }
 
-/*function drawAllPoints() {
-    var r = ice.ace.instance('form:R').getValue()/2;
-    var x,y;
-    var counter=0;
-    var table = document.getElementById('beanTable');
-    drawCanvas('canvas',r);
+    function clickCanvas() {
+        // removeError();
+        var r = document.getElementById("R").valueOf();
+        var canvas = document.getElementById('canvas');
+        var br = canvas.getBoundingClientRect();
+        var left = br.left;
+        var top = br.top;
+        var event = window.event;
+        var x = event.clientX - left;
+        var y = event.clientY - top;
+        alert(x + " " + " " + r);
+        var size = canvas.height;
+        if (r > 0) {
+            x = Math.round((x - size / 2) * r * 10 / 2 / 65) / 10;
+            y = Math.round((-y + size / 2) * r * 10 / 2 / 65) / 10;
+            drawCanvas(r);
+            document.getElementById("X").value = x;
+            document.getElementById("Y").value = y;
+            drawPoint(x, y, r);
+            document.getElementById('pointButton').click();
+            // drawAllPoints();
+        }
+    }
+
+
+function drawAllPoints() {
+    let r = document.getElementById('R').valueOf();
+    let x,y;
+    let counter=0;
+    let table = document.getElementById('resultPoint');
+    drawCanvas(r);
     if (!(table===null)) {
         table.querySelectorAll('td').forEach(function (e) {
             switch (counter) {
@@ -40,11 +69,11 @@ class CanvasP extends Component {
         });
     }
 }
-*/
+
 //------------canvas-------------
 
-function drawCanvas(id, r){
-    var canvas = document.getElementById(id),
+function drawCanvas(r){
+    let canvas = document.getElementById('canvas'),
         context = canvas.getContext("2d");
 //очистка
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -52,7 +81,7 @@ function drawCanvas(id, r){
     context.beginPath();
     context.moveTo(150, 150);
     context.lineTo(150, 85);
-    context.lineTo(280,150);
+    context.lineTo(20,150);
     context.lineTo(150, 150);
     context.closePath();
     context.strokeStyle = "blue";
@@ -62,7 +91,7 @@ function drawCanvas(id, r){
 
 //прямоугольник
     context.beginPath();
-    context.rect(20, 150, 130, 130);
+    context.rect(150, 150, 65, 130);
     context.closePath();
     context.strokeStyle = "blue";
     context.fillStyle = "blue";
@@ -72,7 +101,7 @@ function drawCanvas(id, r){
 //сектор
     context.beginPath();
     context.moveTo(150, 150);
-    context.arc(150, 150, 65, Math.PI, Math.PI*3/2, false);
+    context.arc(150, 150, 130, Math.PI*3/2, 0, false);
     context.closePath();
     context.strokeStyle = "blue";
     context.fillStyle = "blue";
@@ -153,33 +182,9 @@ function drawCanvas(id, r){
     context.stroke();
 }
 
-function clickCanvas(){
-   // removeError();
-    var r = document.getElementById("R").valueOf();
-    var canvas = document.getElementById('canvas');
-    var br = canvas.getBoundingClientRect();
-    var left = br.left;
-    var top = br.top;
-    var event = window.event;
-    var x = event.clientX-left;
-    var y = event.clientY-top;
-    var size = canvas.height;
-    if (r>0) {
-        x = Math.round((x - size / 2) * r * 10 / 2 / 65) / 10;
-        y = Math.round((-y + size / 2) * r * 10 / 2 / 65) / 10;
-        drawCanvas('canvas', r);
-        document.getElementById("form:x_hidden").value = x;
-        document.getElementById("form:Y").value = y;
-       // yVal = y;
-        drawPoint(x, y, r);
-        document.getElementById('form:validationButton').click();
-       // drawAllPoints();
-    }
-}
-
 function drawPoint(x,y,r){
-    var color;
-    var canvas = document.getElementById('canvas'),
+    let color;
+    let canvas = document.getElementById('canvas'),
         ctx = canvas.getContext("2d");
     if (isArea(x,y,r)) {
         color = 'green';
@@ -195,15 +200,15 @@ function drawPoint(x,y,r){
 
 function isArea(x, y, r) {
     if (
-        ((x >= 0) && (y >= 0) && (y <= (r-x)/2)) ||
-        ((x <= 0) && (y >= 0) && ((x * x + y * y) <= (r * r / 4))) ||
-        ((x <= 0) && (y <= 0) && (x >= -r) && (y >= -r))
+        ((x <= 0) && (y >= 0) && (y <= (r+x)/2)) ||
+        ((x >= 0) && (y >= 0) && ((x * x + y * y) <= (r * r ))) ||
+        ((x >= 0) && (y <= 0) && (x <= r/2) && (y >= -r))
     ) {
         return true;
     }
     return false;
 
 }
-//window.addEventListener("load", drawCanvas("canvas", 2));
+window.onload = function() {drawCanvas(2); };
 
 export default CanvasP;
