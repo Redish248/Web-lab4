@@ -1,2 +1,2 @@
-DROP TABLE userlab;
-DROP TABLE pointlab;
+DROP TABLE userlab cascade;
+DROP TABLE pointlab cascade;

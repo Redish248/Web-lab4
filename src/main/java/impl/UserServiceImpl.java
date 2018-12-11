@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User getUserByNickAndPassword(String nick, String password) {
-        return userRepository.findUserByNickAndPassword(nick, password);
+    public User getUserByUsernameAndPassword(String username, String password) {
+        return userRepository.findUserByUsernameAndPassword(username, password);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByNick(String nick) {
-        return userRepository.findUserByNick(nick);
+    public User getUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 }

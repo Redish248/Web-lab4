@@ -1,6 +1,7 @@
 package impl;
 
 import entity.Point;
+import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.PointRepository;
@@ -14,13 +15,11 @@ import java.util.List;
 public class PointServiceImpl implements PointService{
 
     private final PointRepository pointRepository;
-    private final HttpSession httpSession;
 
 
     @Autowired
-    public PointServiceImpl(PointRepository pointRepository, HttpSession session) {
+    public PointServiceImpl(PointRepository pointRepository) {
         this.pointRepository = pointRepository;
-        httpSession = session;
     }
 
     public Point getPointByPointId(int id) {
@@ -32,22 +31,13 @@ public class PointServiceImpl implements PointService{
     }
 
     @Override
-    public List<Point> getPointsBySession() {
-        return (List<Point>) pointRepository.getPointsBySessionId(httpSession.getId());
-    }
-
-    @Transactional
-    @Override
-    public void closeSession() {
-        String s = httpSession.getId();
-        httpSession.invalidate();
-        pointRepository.deleteAllBySessionId(s);
+    public List<Point> getPointsByUser(User user) {
+        return pointRepository.getPointsByUser(user);
     }
 
     @Override
     public boolean savePoint(Point point) {
         if (point.getR() <= 0 || point.getR() > 3 || point.getX() < -5 || point.getX() > 3 || point.getY() < -5 || point.getY() > 5) return false;
-        point.setSessionId(httpSession.getId());
         pointRepository.save(point);
         return true;
     }

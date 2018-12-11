@@ -1,5 +1,6 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,25 +18,28 @@ public class Point implements Serializable{
     Integer pointId;
 
     @Column(name = "x", nullable = false)
-    double x;
+    private double x;
 
     @Column(name = "y", nullable = false)
-    double y;
+    private double y;
 
     @Column(name = "r", nullable = false)
-    double r;
+    private double r;
 
     @Column(name = "is_In_Area", nullable = false)
-    boolean isInArea;
+    private String isInArea;
 
-    @Column(name = "session_Id", nullable = false)
-    private String sessionId;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_Id", referencedColumnName = "user_Id")
+    private User user;
 
-    public Point(double x, double y, double r) {
+    public Point(double x, double y, double r, User user) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.isInArea = checkArea();
+        this.isInArea = checkArea() ? "Попал" : "Не попал";
+        this.user = user;
     }
 
     private boolean checkArea() {

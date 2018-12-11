@@ -11,30 +11,29 @@ import org.springframework.web.bind.annotation.*;
 import service.UserService;
 
 @RestController
-@RequestMapping("/registration")
+@RequestMapping("/lab4")
 @EnableAutoConfiguration
 public class RegistrationController {
 
-   @Autowired
+    @Autowired
     UserService userService;
-    @PostMapping("/checkUser")
-    public @ResponseBody ResponseEntity checkUser(@RequestParam("login") String login, @RequestParam("password") String password) {
-        //User realUser = userService.getUserByNickAndPassword(login, BCrypt.hashpw(password, BCrypt.gensalt()));
-        boolean pswd = BCrypt.checkpw(password,userService.getUserByNick(login).getPassword());
+    @PostMapping("/signin")
+    public @ResponseBody ResponseEntity checkUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+        boolean pswd = BCrypt.checkpw(password,userService.getUserByUsername(username).getPassword());
 
-        if ((login == null) ||(password == null) || (!pswd)) {
+        if ((username == null) ||(password == null) || (!pswd)) {
             return ResponseEntity.status(HttpStatus.OK).body("Username or password was incorrect");
         }
         return ResponseEntity.status(HttpStatus.OK).body("Successful authentication");
     }
 
-    @PostMapping( "/addUser")
-    public @ResponseBody ResponseEntity registerUser(@RequestParam("login") String login, @RequestParam("password") String password) {
-        User user = new User(login, BCrypt.hashpw(password, BCrypt.gensalt()));
-        if ((login == null) || (password == null)) {
-            return ResponseEntity.status(HttpStatus.OK).body("Incorrect nick or password");
+    @PostMapping( "/signup")
+    public @ResponseBody ResponseEntity registerUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+        User user = new User(username, BCrypt.hashpw(password, BCrypt.gensalt()));
+        if ((username == null) || (password == null)) {
+            return ResponseEntity.status(HttpStatus.OK).body("Incorrect username or password");
         }
-        User someUser = userService.getUserByNick(login);
+        User someUser = userService.getUserByUsername(username);
         if (someUser != null) {
             return ResponseEntity.status(HttpStatus.OK).body("User already exists");
         }

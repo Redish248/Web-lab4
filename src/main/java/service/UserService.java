@@ -6,7 +6,7 @@ import repository.UserRepository;
 
 public interface UserService {
 
-    User getUserByNickAndPassword(String nick, String password);
+    User getUserByUsernameAndPassword(String username, String password);
     void saveUser(User user);
-    User getUserByNick(String nick);
+    User getUserByUsername(String username);
 }

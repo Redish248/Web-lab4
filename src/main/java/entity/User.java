@@ -1,32 +1,40 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
 
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table(name = "userlab", schema = "public", catalog = "postgres")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_Id")
-    Integer id;
+    private Integer id;
 
-    @Column(name = "nick", nullable = false, length = 40)
-    String nick;
+    @Column(name = "username", nullable = false, length = 40)
+    private String username;
 
     @Column(name = "password", nullable = false, length = 40)
-    String password;
+    private String password;
 
-    public User(String nick, String password) {
-        this.nick = nick;
+    @OneToMany(mappedBy = "user")
+    @JsonProperty(access = Access.READ_ONLY)
+    private Collection<Point> points;
+
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }
