@@ -29,9 +29,9 @@ public class Point implements Serializable{
     @Column(name = "is_In_Area", nullable = false)
     private String isInArea;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_Id", referencedColumnName = "user_Id")
+    @JsonIgnore
     private User user;
 
     public Point(double x, double y, double r, User user) {

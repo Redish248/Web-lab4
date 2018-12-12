@@ -1,15 +1,10 @@
 package entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 
 
@@ -30,7 +25,6 @@ public class User implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    @JsonProperty(access = Access.READ_ONLY)
     private Collection<Point> points;
 
     public User(String username, String password) {

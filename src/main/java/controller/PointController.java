@@ -29,16 +29,16 @@ public class PointController {
     }
 
     @PostMapping("/savepoint")
-    public @ResponseBody ResponseEntity savePoint(@RequestParam("x") String x,
-                             @RequestParam("y") String y,
-                             @RequestParam("r") String r) {
+    public @ResponseBody ResponseEntity savePoint(@RequestParam("x") double x,
+                             @RequestParam("y") double y,
+                             @RequestParam("r") double r) {
 
         User user = userService.getUserByUsername( SecurityContextHolder.getContext().getAuthentication().getName());
 
-        Point point = new Point(Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(r), user);
+        Point point = new Point(x,y,r, user);
 
         if (pointService.savePoint(point)) {
-            return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(point));
+            return ResponseEntity.status(HttpStatus.OK).body(point);
         } else {
             return ResponseEntity.status(HttpStatus.OK).body("Incorrect input!");
         }
@@ -47,6 +47,6 @@ public class PointController {
     @GetMapping(value = "/getpoints")
     public @ResponseBody ResponseEntity getAllPoints() {
         User user = userService.getUserByUsername( SecurityContextHolder.getContext().getAuthentication().getName());
-        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(pointService.getPointsByUser(user)));
+        return ResponseEntity.status(HttpStatus.OK).body((pointService.getPointsByUser(user)));
     }
 }
