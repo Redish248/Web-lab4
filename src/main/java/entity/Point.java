@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "pointlab", schema = "public", catalog = "postgres")
+@Table(name = "pointlab")
 public class Point implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

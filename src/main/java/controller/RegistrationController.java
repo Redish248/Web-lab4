@@ -1,6 +1,5 @@
 package controller;
 
-import com.google.gson.Gson;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,15 +16,6 @@ public class RegistrationController {
 
     @Autowired
     UserService userService;
-    @PostMapping("/signin")
-    public @ResponseBody ResponseEntity checkUser(@RequestParam("username") String username, @RequestParam("password") String password) {
-        boolean pswd = BCrypt.checkpw(password,userService.getUserByUsername(username).getPassword());
-
-        if ((username == null) ||(password == null) || (!pswd)) {
-            return ResponseEntity.status(HttpStatus.OK).body("Username or password was incorrect");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body("Successful authentication");
-    }
 
     @PostMapping( "/signup")
     public @ResponseBody ResponseEntity registerUser(@RequestParam("username") String username, @RequestParam("password") String password) {
@@ -38,6 +28,6 @@ public class RegistrationController {
             return ResponseEntity.status(HttpStatus.OK).body("User already exists");
         }
         userService.saveUser(user);
-        return ResponseEntity.status(HttpStatus.OK).body(new Gson().toJson(user));
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "userlab", schema = "public", catalog = "postgres")
+@Table(name = "userlab")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

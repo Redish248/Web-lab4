@@ -1,6 +1,5 @@
 package controller;
 
-import com.google.gson.Gson;
 import entity.Point;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
