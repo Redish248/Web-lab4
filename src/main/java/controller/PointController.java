@@ -28,17 +28,20 @@ public class PointController {
     }
 
     @PostMapping("/savepoint")
-    public @ResponseBody ResponseEntity savePoint(@RequestParam("x") double x,
-                             @RequestParam("y") double y,
-                             @RequestParam("r") double r) {
+    public @ResponseBody ResponseEntity savePoint(@RequestParam("x") String x,
+                             @RequestParam("y") String y,
+                             @RequestParam("r") String r) {
 
         User user = userService.getUserByUsername( SecurityContextHolder.getContext().getAuthentication().getName());
 
-        Point point = new Point(x,y,r, user);
-
-        if (pointService.savePoint(point)) {
-            return ResponseEntity.status(HttpStatus.OK).body(point);
-        } else {
+        try {
+            Point point = new Point(Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(r), user);
+            if (pointService.savePoint(point)) {
+                return ResponseEntity.status(HttpStatus.OK).body(point);
+            } else {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect input!");
         }
     }
