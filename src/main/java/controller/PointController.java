@@ -39,7 +39,7 @@ public class PointController {
         if (pointService.savePoint(point)) {
             return ResponseEntity.status(HttpStatus.OK).body(point);
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body("Incorrect input!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect input!");
         }
     }
 
