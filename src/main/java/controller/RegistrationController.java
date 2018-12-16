@@ -20,7 +20,7 @@ public class RegistrationController {
     @PostMapping( "/signup")
     public @ResponseBody ResponseEntity registerUser(@RequestParam("username") String username, @RequestParam("password") String password) {
         User user = new User(username, BCrypt.hashpw(password, BCrypt.gensalt()));
-        if ((username == "") || (password == "")) {
+        if ((username.equals("")) || (password.equals(""))) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect username or password");
         }
         User someUser = userService.getUserByUsername(username);
